@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const uniqid = require("uniqid");
 
-let todos = [];
+var todos = [];
 let id = 0;
 
 app.set("view engine", "ejs");
@@ -20,12 +20,9 @@ app.get("/create", (req, res) => {
 });
 
 app.post("/delete", (req, res) => {
-  console.log(req.body.todo_id);
-  todos.forEach((todo) => {
-    if ((todo.id = req.body.todo_id)) {
-      console.log("I am equal");
-    }
-  });
+  const postId = req.body.todo_id;
+  console.log(postId);
+  todos = todos.filter((todo) => todo.id !== postId);
   res.redirect("/");
 });
 
