@@ -17,14 +17,14 @@
         <p class="item-deadline">
           <%= todo.deadline %>
         </p>
-        <div class="edit-buttons">
+        <div class="edit-buttons flex justify-center marginy10">
           <form action="/edit" method="POST">
-            <input type="hidden" name="todo_id" value="<%= todo.id %> ">
-            <button class="add-button" type="submit">Edit</button>
+            <input type="hidden" name="todo_id" value="<%= todo.id %>">
+            <button class="add-button marginx5" type="submit">Edit</button>
           </form>
           <form action="/delete" method="POST">
             <input type="hidden" name="todo_id" value="<%= todo.id %> ">
-            <button class="add-button" type="submit">Delete</button>
+            <button class="add-button marginx5" type="submit">Delete</button>
           </form>
         </div>
       </div>

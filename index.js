@@ -1,9 +1,10 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const { v4: uuidv4 } = require("uuid");
+const uniqid = require("uniqid");
 
 let todos = [];
+let id = 0;
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -19,13 +20,19 @@ app.get("/create", (req, res) => {
 });
 
 app.post("/delete", (req, res) => {
-  todos = todos.filter((todo) => todo.id !== req.body.todo_id);
+  console.log(req.body.todo_id);
+  todos.forEach((todo) => {
+    if ((todo.id = req.body.todo_id)) {
+      console.log("I am equal");
+    }
+  });
   res.redirect("/");
 });
 
 app.post("/create", (req, res) => {
+  id++;
   const newTodo = {
-    id: uuidv4(),
+    id: uniqid(),
     title: req.body.todo_title,
     description: req.body.todo_description,
     state: req.body.todo_select,
