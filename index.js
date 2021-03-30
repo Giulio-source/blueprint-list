@@ -1,24 +1,38 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const Todo = require("./models/Todo");
+const { v4: uuidv4 } = require("uuid");
 
-// mongoose.connect("mongodb://localhost/blogDB", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-// });
-// const db = mongoose.connection;
-// db.on("error", (err) => console.log(err));
-// db.once("open", () => console.log("Connected to DB"));
-// mongoose.set("useFindAndModify", false);
+let todos = [];
 
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { todos: todos });
+});
+
+app.get("/create", (req, res) => {
+  res.render("create");
+});
+
+app.post("/delete", (req, res) => {
+  todos = todos.filter((todo) => todo.id !== req.body.todo_id);
+  res.redirect("/");
+});
+
+app.post("/create", (req, res) => {
+  const newTodo = {
+    id: uuidv4(),
+    title: req.body.todo_title,
+    description: req.body.todo_description,
+    state: req.body.todo_select,
+    deadline: req.body.todo_deadline,
+  };
+  todos.push(newTodo);
+  res.redirect("/");
 });
 
 app.listen(3000, () => {

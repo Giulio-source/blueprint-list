@@ -1,0 +1,105 @@
+$blue: #0049cb;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: rgb(54, 54, 54);
+}
+
+.container {
+  color: white;
+  font-family: "DM Sans", sans-serif;
+  gap: 20px;
+  .title {
+    font-family: "Syne", sans-serif;
+    text-align: center;
+    padding: 50px 0;
+  }
+  .list-items {
+    margin: 20px;
+    gap: 20px;
+  }
+}
+.add-button {
+  background: rgb(54, 54, 54);
+  padding: 10px 20px;
+  border: solid 1px white;
+  color: inherit;
+  border-radius: 20px;
+  margin: 0 15px;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  &:hover {
+    background-color: $blue;
+    border-color: $blue;
+  }
+}
+
+input,
+button {
+  font-family: inherit;
+}
+
+.item {
+  padding: 20px;
+  border: solid 1px white;
+  border-radius: 10px;
+  h6 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+
+[type="checkbox"] {
+  position: relative;
+  visibility: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1em;
+    height: 1em;
+    border: solid 1px white;
+    visibility: visible;
+  }
+}
+
+.form-partial {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+  padding-bottom: 100px;
+  gap: 15px;
+  .form-field,
+  textarea {
+    background: transparent;
+    border: 1px solid white;
+    color: inherit;
+    font-family: inherit;
+    padding: 5px;
+    &:focus {
+      outline: none;
+      border-color: #517fcf;
+    }
+  }
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}

@@ -1,12 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To Do List</title>
-  </head>
-  <body>
-    <h1>I am working</h1>
-  </body>
-</html>
+<%- include("./partials/header") %>
+  <div class="add-container flex justify-center">
+    <a class="add-button" href="/create">Add a new note</a>
+  </div>
+  <div class="list-items flex justify-center">
+    <% todos.forEach(todo=> {%>
+      <div class="item">
+        <h6 class="item-title">
+          <%= todo.title %>
+        </h6>
+        <p class="item-description">
+          <%= todo.description %>
+        </p>
+        <p class="item-select">
+          <%= todo.state %>
+        </p>
+        <p class="item-deadline">
+          <%= todo.deadline %>
+        </p>
+        <div class="edit-buttons">
+          <form action="/edit" method="POST">
+            <input type="hidden" name="todo_id" value="<%= todo.id %> ">
+            <button class="add-button" type="submit">Edit</button>
+          </form>
+          <form action="/delete" method="POST">
+            <input type="hidden" name="todo_id" value="<%= todo.id %> ">
+            <button class="add-button" type="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+
+  </div>
+
+
+
+
+  <%- include("./partials/footer") %>

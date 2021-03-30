@@ -1,0 +1,14 @@
+<form class="form-partial" action="/create" method="POST">
+    <label for="todo_title">Titolo</label>
+    <input class="form-field" type="text" id="todo_title" name="todo_title" maxlength="100" required>
+    <label for="todo_description">Descrizione</label>
+    <textarea name="todo_description" id="todo_description" rows="5"></textarea>
+    <select class="form-field" name="todo_select" id="todo_select">
+        <option value="Inserito">Inserito</option>
+        <option value="In elaborazione">In elaborazione</option>
+        <option value="Completato">Completato</option>
+    </select>
+    <label for="todo_deadline">Data di scadenza</label>
+    <input class="form-field" type="date" id="todo_deadline" name="todo_deadline">
+    <button class="add-button" type="submit">Add a new note</button>
+</form>
