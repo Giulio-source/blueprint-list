@@ -132,6 +132,10 @@ body {
   border-color: #517fcf;
 }
 
+.form-partial .option {
+  color: #363636;
+}
+
 .form-partial ::-webkit-calendar-picker-indicator {
   -webkit-filter: invert(1);
           filter: invert(1);
