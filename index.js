@@ -3,11 +3,7 @@ const express = require("express");
 const app = express();
 const uniqid = require("uniqid");
 
-var todos = [
-  { id: uniqid(), title: "123" },
-  { id: uniqid(), title: "234" },
-  { id: uniqid(), title: "345" },
-];
+var todos = [];
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));

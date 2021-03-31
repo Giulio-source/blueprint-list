@@ -1,23 +1,33 @@
 <%- include("./partials/header") %>
-<div class="add-container flex justify-center">
-  <a class="add-button" href="/create">Add a new note</a>
-</div>
-<div class="list-items">
-  <% todos.forEach(todo=> {%>
-  <div class="item">
-    <h6 class="item-title"><%= todo.title %></h6>
-    <p class="item-description"><%= todo.description %></p>
-    <p class="item-select"><%= todo.state %></p>
-    <p class="item-deadline"><%= todo.deadline %></p>
-    <div class="edit-buttons flex justify-center marginy10">
-      <a class="add-button marginx5" href="/edit/<%= todo.id %>">Edit</a>
-      <form action="/delete" method="POST">
-        <input type="hidden" name="todoId" value="<%=todo.id%>" />
-        <button class="add-button marginx5" type="submit">Delete</button>
-      </form>
-    </div>
+  <div class="add-container flex justify-center">
+    <a class="add-button" href="/create">Add a new note</a>
   </div>
-  <% }) %>
-</div>
+  <div class="list-items">
+    <% todos.forEach(todo=> {%>
+      <div class="item flex flex-column flex-sb">
+        <div class="item-content">
+          <h6 class="item-title">
+            <%= todo.title %>
+          </h6>
+          <p class="item-description">
+            <%= todo.description %>
+          </p>
+          <p class="item-select">
+            <%= todo.state %>
+          </p>
+          <p class="item-deadline">
+            <%= todo.deadline %>
+          </p>
+        </div>
+        <div class="edit-buttons flex justify-center marginy10">
+          <a class="add-button marginx5" href="/edit/<%= todo.id %>">Edit</a>
+          <form action="/delete" method="POST">
+            <input type="hidden" name="todoId" value="<%=todo.id%>" />
+            <button class="add-button marginx5" type="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+  </div>
 
-<%- include("./partials/footer") %>
+  <%- include("./partials/footer") %>
