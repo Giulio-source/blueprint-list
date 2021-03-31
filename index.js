@@ -1,24 +1,70 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const Todo = require("./models/Todo");
+const uniqid = require("uniqid");
 
-mongoose.connect("mongodb://localhost/trueblueDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
-const db = mongoose.connection;
-db.on("error", (err) => console.log(err));
-db.once("open", () => console.log("Connected to DB"));
-mongoose.set("useFindAndModify", false);
+var todos = [
+  { id: uniqid(), title: "123" },
+  { id: uniqid(), title: "234" },
+  { id: uniqid(), title: "345" },
+];
 
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { todos: todos });
+});
+
+app.get("/create", (req, res) => {
+  res.render("create", { todo: {} });
+});
+
+app.post("/create", (req, res) => {
+  const newTodo = {
+    id: uniqid(),
+    title: req.body.todo_title,
+    description: req.body.todo_description,
+    state: req.body.todo_select,
+    deadline: req.body.todo_deadline,
+  };
+  todos.push(newTodo);
+  res.redirect("/");
+});
+
+app.post("/delete", (req, res) => {
+  const todoDeleteId = req.body.todoId;
+  todos = todos.filter((todo) => todo.id !== todoDeleteId);
+  todos.forEach((todo) => console.log(todo.id));
+  console.log("comparison", todoDeleteId);
+  res.redirect("/");
+});
+
+app.get("/edit/:id", (req, res) => {
+  const todoEdit = todos.find((todo) => todo.id == req.params.id);
+  console.log(todoEdit);
+  res.render("edit", { todo: todoEdit });
+});
+
+app.post("/edit/:id", (req, res) => {
+  console.log(req.params.id);
+  const newTodo = {
+    id: req.params.id,
+    title: req.body.todo_title,
+    description: req.body.todo_description,
+    state: req.body.todo_select,
+    deadline: req.body.todo_deadline,
+  };
+  todos = todos.map((todo) => {
+    if (todo.id === newTodo.id) {
+      return newTodo;
+    } else {
+      return todo;
+    }
+  });
+  res.redirect("/");
 });
 
 app.listen(3000, () => {
